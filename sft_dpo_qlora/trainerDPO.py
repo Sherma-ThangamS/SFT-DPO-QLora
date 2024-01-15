@@ -7,7 +7,7 @@ from huggingface_hub import login
 login()
 
 
-class Trainer:
+class dpoTrainer:
     def __init__(self, config=None):
         if config is None:
             raise ValueError("Please provide a DPOConfig object when creating an instance of DPOTrainer.")
