@@ -1,4 +1,4 @@
-class SFTConfig:
+class sftConfig:
     def __init__(
         self,
         MODEL_ID="TheBloke/zephyr-7B-alpha-GPTQ",
