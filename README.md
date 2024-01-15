@@ -25,7 +25,7 @@ from sft_dpo_qlora import Trainer, Config
 ```python
 config = Config(
     MODEL_ID="Model/quantized-model",
-    DATASET_NAME="YourHuggingFaceDataset/dataset-name",
+    DATA=["YourHuggingFaceDataset/dataset-name","Questions","Answers]
     BITS=4,
     LORA_R=8,
     LORA_ALPHA=8,
@@ -68,7 +68,7 @@ trainer.train()
 The `Config` class allows you to customize various parameters for the training process. Key parameters include:
 
 - `MODEL_ID`: The identifier of the base model to use.
-- `DATASET_NAME`: The Hugging Face dataset name.
+- `DATA`: The Hugging Face dataset name , Instruction , Target
 - `BITS`: Number of bits for quantization.
 - `LORA_R`, `LORA_ALPHA`, `LORA_DROPOUT`: LoRA Adapter configuration.
 - `TARGET_MODULES`: Target modules for the LoRA Adapter.
