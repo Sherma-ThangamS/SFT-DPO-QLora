@@ -1,4 +1,4 @@
-class DPOConfig:
+class dpoConfig:
     def __init__(
         self,
         MODEL_ID="TheBloke/Mistral-7B-v0.1-GPTQ",
