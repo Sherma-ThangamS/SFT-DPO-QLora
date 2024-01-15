@@ -38,10 +38,4 @@ setup(
     ],
     keywords='sft dpo qlora trainer',
     python_requires='>=3.9',
-    entry_points={
-    'console_scripts': [
-        'sft_train=sft_dpo_qlora.trainerSFT:main',
-        'dpo_train=sft_dpo_qlora.trainerDPO:main',
-        ],
-    },
 )
