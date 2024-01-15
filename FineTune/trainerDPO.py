@@ -9,7 +9,7 @@ login()
 
 
 class DPOTrainer:
-    def __init__(self, config=None):
+    def __init__(self, config=None,dataset_name="HuggingFaceH4/ultrafeedback_binarized"):
         if config is None:
             raise ValueError("Please provide a DPOConfig object when creating an instance of DPOTrainer.")
 
@@ -36,7 +36,7 @@ class DPOTrainer:
 
     def _dpo_data(self):
         dataset = load_dataset(
-            "HuggingFaceH4/ultrafeedback_binarized",
+            self.dataset_name,
             split="test_prefs",
             use_auth_token=True
         )
@@ -117,5 +117,3 @@ class DPOTrainer:
         )
 
         dpo_trainer.train()
-
-        dpo_trainer.push_to_hub()
