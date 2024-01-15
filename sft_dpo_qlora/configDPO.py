@@ -1,7 +1,7 @@
 class DPOConfig:
     def __init__(
         self,
-        MODEL_ID="TheBloke/OpenHermes-2-Mistral-7B-GPTQ",
+        MODEL_ID="TheBloke/Mistral-7B-GPTQ",
         BITS=4,
         LORA_R=8,
         LORA_ALPHA=8,
