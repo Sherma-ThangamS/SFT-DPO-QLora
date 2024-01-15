@@ -3,7 +3,6 @@ from datasets import load_dataset, Dataset
 from peft import AutoPeftModelForCausalLM, LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from transformers import AutoTokenizer, TrainingArguments, AutoModelForCausalLM, GPTQConfig
 from trl import DPOTrainer
-from configDPO import Config
 from huggingface_hub import login
 login()
 
