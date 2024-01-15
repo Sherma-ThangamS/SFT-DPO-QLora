@@ -1,13 +1,5 @@
-# sft_dpo_qlora/__init__.py
+from sft_dpo_qlora.configSFT import stfConfig
+from sft_dpo_qlora.configDPO import dpoConfig
+from sft_dpo_qlora.trainerSFT import sftTrainer
+from sft_dpo_qlora.trainerDPO import dpoTrainer
 
-from .configSFT import SFTConfig
-from .configDPO import DPOConfig
-from .trainerSFT import SFTTrainer
-from .trainerDPO import DPOTrainer
-
-__all__ = [
-    'SFTConfig',
-    'DPOConfig',
-    'SFTTrainer',
-    'DPOTrainer',
-]
