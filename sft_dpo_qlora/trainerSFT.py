@@ -4,7 +4,8 @@ from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 from transformers import AutoModelForCausalLM, AutoTokenizer, GPTQConfig, TrainingArguments
 from trl import SFTTrainer
 from configSFT import Config  # Import the Config class from config.py
-
+from huggingface_hub import login
+login()
 class Trainer:
 
     def __init__(self, config=None):
