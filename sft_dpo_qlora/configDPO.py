@@ -14,7 +14,7 @@ class DPOConfig:
         MAX_STEPS=50,
         LOGGING_FIRST_STEP=True,
         LOGGING_STEPS=10,
-        OUTPUT_DIR="FineTuned",
+        OUTPUT_DIR="openhermes-mistral-dpo-gptq",
         OPTIMIZER="paged_adamw_32bit",
         LR=2e-4,
         WARMUP_STEPS=2,
