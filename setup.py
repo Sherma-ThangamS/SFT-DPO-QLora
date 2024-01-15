@@ -14,8 +14,8 @@ setup(
     author='Sherma Thangam S',
     author_email='sshermathangam@gmail.com',
     description='SFT-DPO-QLora Trainer Package',
-    long_description_content_type= 'text/x-rst`,
-    long_description='A package that allows to train llm model in two methon SFT and DPO',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     url='https://github.com/Sherma-ThangamS/SFT-DPO-QLora',
     packages=find_packages(),
     install_requires=[
