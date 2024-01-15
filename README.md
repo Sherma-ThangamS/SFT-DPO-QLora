@@ -17,7 +17,7 @@ pip install git+https://github.com/Sherma-ThangamS/SFT-QLora.git
 ### 1. Import the Trainer and Config classes
 
 ```python
-from zephyr_trainer import Trainer, Config
+from sft_qlora import Trainer, Config
 ```
 
 ### 2. Create a Config object
