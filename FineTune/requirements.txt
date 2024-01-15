@@ -1,0 +1,9 @@
+datasets 
+transformers 
+trl 
+peft 
+accelerate 
+bitsandbytes 
+auto-gptq 
+optimum 
+einops 
