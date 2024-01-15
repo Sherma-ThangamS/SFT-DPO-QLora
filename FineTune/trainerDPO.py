@@ -5,11 +5,12 @@ from transformers import AutoTokenizer, TrainingArguments, AutoModelForCausalLM,
 from trl import DPOTrainer
 from configDPO import Config
 from huggingface_hub import login
+
+# Login to Hugging Face Hub
 login()
 
-
 class DPOTrainer:
-    def __init__(self, config=None,dataset_name="HuggingFaceH4/ultrafeedback_binarized"):
+    def __init__(self, config=None, dataset_name="HuggingFaceH4/ultrafeedback_binarized"):
         if config is None:
             raise ValueError("Please provide a DPOConfig object when creating an instance of DPOTrainer.")
 
@@ -18,6 +19,10 @@ class DPOTrainer:
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
+        # Step 1: Initialize model and tokenizer
+        print("\n====================================================================\n")
+        print("\t\t\t  Initializing model and tokenizer")
+        print("\n====================================================================\n")
         self.model = AutoModelForCausalLM.from_pretrained(
             self.config.MODEL_ID,
             torch_dtype=torch.float16,
@@ -35,6 +40,10 @@ class DPOTrainer:
         self.train_dataset = self._dpo_data()
 
     def _dpo_data(self):
+        # Step 2: Load and preprocess dataset
+        print("\n====================================================================\n")
+        print("\t\t\t Loading and preprocessing dataset")
+        print("\n====================================================================\n")
         dataset = load_dataset(
             self.dataset_name,
             split="test_prefs",
@@ -57,6 +66,10 @@ class DPOTrainer:
         )
 
     def train(self):
+        # Step 3: Prepare training and validation datasets
+        print("\n====================================================================\n")
+        print("\t\t\t Preparing training and validation datasets")
+        print("\n====================================================================\n")
         train_df = self.train_dataset.to_pandas()
         train_df["chosen"] = train_df["chosen"].apply(lambda x: x[1]["content"])
         train_df["rejected"] = train_df["rejected"].apply(lambda x: x[1]["content"])
@@ -75,6 +88,10 @@ class DPOTrainer:
         )
         peft_config.inference_mode = self.config.INFERENCE_MODE
 
+        # Step 4: Prepare models for training
+        print("\n====================================================================\n")
+        print("\t\t\t Preparing models for training")
+        print("\n====================================================================\n")
         self.model = prepare_model_for_kbit_training(self.model)
         self.model.config.use_cache = False
         self.model.gradient_checkpointing_enable()
@@ -103,6 +120,10 @@ class DPOTrainer:
             push_to_hub=self.config.PUSH_TO_HUB
         )
 
+        # Step 5: Initialize DPO Trainer
+        print("\n====================================================================\n")
+        print("\t\t\t Initializing DPO Trainer")
+        print("\n====================================================================\n")
         dpo_trainer = DPOTrainer(
             self.model,
             self.model_ref,
@@ -116,4 +137,17 @@ class DPOTrainer:
             max_prompt_length=self.config.MAX_PROMPT_LENGTH
         )
 
+        # Step 6: Start training
+        print("\n====================================================================\n")
+        print("\t\t\t  Starting training")
+        print("\n====================================================================\n")
         dpo_trainer.train()
+
+        print("\n====================================================================\n")
+        print("\t\t\t Training completed")
+        print("\n====================================================================\n")
+
+# Example usage:
+# config = Config()  # You should instantiate the Config class with appropriate parameters
+# dpo_trainer = DPOTrainer(config)
+# dpo_trainer.train()
