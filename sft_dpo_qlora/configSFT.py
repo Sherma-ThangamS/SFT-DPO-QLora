@@ -36,7 +36,7 @@ class Config:
         self.INSTRUCTION_FIELD = DATA[1]
         self.TARGET_FIELD = DATA[2]
         self.BITS = BITS
-        self.USE_EXLLAMA = DISABLE_EXLLAMA
+        self.DISABLE_EXLLAMA = DISABLE_EXLLAMA
         self.DEVICE_MAP = DEVICE_MAP
         self.USE_CACHE = USE_CACHE
         self.LORA_R = LORA_R
