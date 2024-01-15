@@ -9,7 +9,7 @@ Welcome to the SFT-DPO-QLora Trainer package! This package is designed to stream
 To install the SFT-DPO-QLora Trainer package, follow these steps:
 
 ```bash
-pip install git+https://github.com/YourUsername/SFT-DPO-QLora.git
+pip install sft-dpo-qlora
 ```
 
 ## Usage
