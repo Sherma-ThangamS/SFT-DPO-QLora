@@ -5,7 +5,7 @@ class Config:
         DATA=["bitext/Bitext-customer-support-llm-chatbot-training-dataset", "instruction", "response"],
         CONTEXT_FIELD="",
         BITS=4,
-        USE_EXLLAMA=False,
+        DISABLE_EXLLAMA=True,
         DEVICE_MAP="auto",
         USE_CACHE=False,
         LORA_R=16,
@@ -36,7 +36,7 @@ class Config:
         self.INSTRUCTION_FIELD = DATA[1]
         self.TARGET_FIELD = DATA[2]
         self.BITS = BITS
-        self.USE_EXLLAMA = USE_EXLLAMA
+        self.USE_EXLLAMA = DISABLE_EXLLAMA
         self.DEVICE_MAP = DEVICE_MAP
         self.USE_CACHE = USE_CACHE
         self.LORA_R = LORA_R
