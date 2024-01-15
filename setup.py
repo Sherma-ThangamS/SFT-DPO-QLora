@@ -7,7 +7,6 @@ here = os.path.abspath(os.path.dirname(__file__))
 with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
     long_description = "\n" + fh.read()
 
-LONG_DESCRIPTION = 'A package that allows to train llm model in two methon SFT and DPO'
 
 setup(
     name='sft_dpo_qlora',
@@ -15,8 +14,8 @@ setup(
     author='Sherma Thangam S',
     author_email='sshermathangam@gmail.com',
     description='SFT-DPO-QLora Trainer Package',
-    long_description_content_type="text/markdown",
-    long_description=long_description,
+    long_description_content_type= 'text/x-rst`,
+    long_description='A package that allows to train llm model in two methon SFT and DPO',
     url='https://github.com/Sherma-ThangamS/SFT-DPO-QLora',
     packages=find_packages(),
     install_requires=[
