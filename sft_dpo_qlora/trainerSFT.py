@@ -6,7 +6,7 @@ from trl import SFTTrainer
 from configSFT import Config  # Import the Config class from config.py
 from huggingface_hub import login
 login()
-class Trainer:
+class sftTrainer:
 
     def __init__(self, config=None):
 
