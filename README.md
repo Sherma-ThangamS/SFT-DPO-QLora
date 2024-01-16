@@ -17,13 +17,13 @@ pip install sft-dpo-qlora
 ### 1. Import the Trainer and Config classes
 
 ```python
-from sft_dpo_qlora import Trainer, Config
+from sft_dpo_qlora import sftTrainer,sftConfig
 ```
 
 ### 2. Create a Config object
 
 ```python
-config = Config(
+config = sftConfig(
     MODEL_ID="Model/quantized-model",
     DATA=["YourHuggingFaceDataset/dataset-name","Questions","Answers]
     BITS=4,
@@ -46,15 +46,15 @@ config = Config(
     INFERENCE_MODE=False,
     LOGGING_FIRST_STEP=True,
     LOGGING_STEPS=10,
-    OUTPUT_DIR="your_output_directory",
-    PUSH_TO_HUB=True
+    OUTPUT_DIR="FineTune1",
+    PUSH_TO_HUB=False
 )
 ```
 
 ### 3. Initialize the Trainer with the Config object
 
 ```python
-trainer = Trainer(config)
+trainer = sftTrainer(config)
 ```
 
 ### 4. Train the model
