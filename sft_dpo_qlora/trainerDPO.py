@@ -10,6 +10,7 @@ class dpoTrainer:
             raise ValueError("Please provide a DPOConfig object when creating an instance of DPOTrainer.")
 
         self.config = config
+        self.dataset_name=dataset_name
         self.tokenizer = AutoTokenizer.from_pretrained(self.config.MODEL_ID)
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
