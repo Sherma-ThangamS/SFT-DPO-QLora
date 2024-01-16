@@ -19,7 +19,7 @@ class dpoConfig:
         LR=2e-4,
         WARMUP_STEPS=2,
         FP16=True,
-        PUSH_TO_HUB=True,
+        PUSH_TO_HUB=False,
         MAX_LENGTH=512,
         MAX_TARGET_LENGTH=256,
         MAX_PROMPT_LENGTH=256,
