@@ -3,9 +3,6 @@ from datasets import load_dataset, Dataset
 from peft import AutoPeftModelForCausalLM, LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from transformers import AutoTokenizer, TrainingArguments, AutoModelForCausalLM, GPTQConfig
 from trl import DPOTrainer
-from huggingface_hub import login
-login()
-
 
 class dpoTrainer:
     def __init__(self, config=None):
