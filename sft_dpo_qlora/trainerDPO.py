@@ -3,9 +3,9 @@ from datasets import load_dataset, Dataset
 from peft import AutoPeftModelForCausalLM, LoraConfig, get_peft_model, prepare_model_for_kbit_training
 from transformers import AutoTokenizer, TrainingArguments, AutoModelForCausalLM, GPTQConfig
 from trl import DPOTrainer
-
 class dpoTrainer:
-    def __init__(self, config=None):
+  
+    def __init__(self, config=None, dataset_name="HuggingFaceH4/ultrafeedback_binarized"):
         if config is None:
             raise ValueError("Please provide a DPOConfig object when creating an instance of DPOTrainer.")
 
@@ -15,6 +15,10 @@ class dpoTrainer:
         if self.tokenizer.pad_token is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
+        # Step 1: Initialize model and tokenizer
+        print("\n====================================================================\n")
+        print("\t\t\t STEP:1 Initializing model and tokenizer")
+        print("\n====================================================================\n")
         self.model = AutoModelForCausalLM.from_pretrained(
             self.config.MODEL_ID,
             torch_dtype=torch.float16,
@@ -32,8 +36,12 @@ class dpoTrainer:
         self.train_dataset = self._dpo_data()
 
     def _dpo_data(self):
+        # Step 2: Load and preprocess dataset
+        print("\n====================================================================\n")
+        print("\t\t\t STEP:2 Loading and preprocessing dataset")
+        print("\n====================================================================\n")
         dataset = load_dataset(
-            "HuggingFaceH4/ultrafeedback_binarized",
+            self.dataset_name,
             split="test_prefs",
             use_auth_token=True
         )
@@ -54,6 +62,10 @@ class dpoTrainer:
         )
 
     def train(self):
+        # Step 3: Prepare training and validation datasets
+        print("\n====================================================================\n")
+        print("\t\t\t STEP:3 Preparing training and validation datasets")
+        print("\n====================================================================\n")
         train_df = self.train_dataset.to_pandas()
         train_df["chosen"] = train_df["chosen"].apply(lambda x: x[1]["content"])
         train_df["rejected"] = train_df["rejected"].apply(lambda x: x[1]["content"])
@@ -72,6 +84,10 @@ class dpoTrainer:
         )
         peft_config.inference_mode = self.config.INFERENCE_MODE
 
+        # Step 4: Prepare models for training
+        print("\n====================================================================\n")
+        print("\t\t\tSTEP 4: Preparing models for training")
+        print("\n====================================================================\n")
         self.model = prepare_model_for_kbit_training(self.model)
         self.model.config.use_cache = False
         self.model.gradient_checkpointing_enable()
@@ -100,6 +116,10 @@ class dpoTrainer:
             push_to_hub=self.config.PUSH_TO_HUB
         )
 
+        # Step 5: Initialize DPO Trainer
+        print("\n====================================================================\n")
+        print("\t\t\tSTEP 5: Initializing DPO Trainer")
+        print("\n====================================================================\n")
         dpo_trainer = DPOTrainer(
             self.model,
             self.model_ref,
@@ -113,4 +133,13 @@ class dpoTrainer:
             max_prompt_length=self.config.MAX_PROMPT_LENGTH
         )
 
+        # Step 6: Start training
+        print("\n====================================================================\n")
+        print("\t\t\tSTEP 6: Starting training")
+        print("\n====================================================================\n")
         dpo_trainer.train()
+
+        print("\n====================================================================\n")
+        print("\t\t\tTraining completed")
+        print("\n====================================================================\n")
+
