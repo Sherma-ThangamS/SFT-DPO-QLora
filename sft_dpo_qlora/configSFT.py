@@ -25,7 +25,7 @@ class sftConfig:
         NUM_TRAIN_EPOCHS=1,
         MAX_STEPS=250,
         FP16=True,
-        PUSH_TO_HUB=True,
+        PUSH_TO_HUB=False,
         DATASET_TEXT_FIELD="text",
         MAX_SEQ_LENGTH=512,
         PACKING=False,
