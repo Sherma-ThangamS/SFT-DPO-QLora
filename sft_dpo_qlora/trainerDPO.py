@@ -116,5 +116,3 @@ class dpoTrainer:
         )
 
         dpo_trainer.train()
-
-        dpo_trainer.push_to_hub()
