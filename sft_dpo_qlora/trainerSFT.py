@@ -9,12 +9,6 @@ class sftTrainer:
 
     def __init__(self, config=None):
 
-        '''
-        A Trainer used to train the Zephyr 7B model which beats Llama2-70b-chat model for your custom usecase
-        Initialized:
-        config: Parameters required for the trainer to create and process dataset, train and save model finally
-        tokenizer: Tokenizer required in the training loop
-        '''
         if config is None:
             raise ValueError("Please provide a Config object when creating an instance of Trainer.")
 
@@ -23,26 +17,12 @@ class sftTrainer:
         self.tokenizer.pad_token = self.tokenizer.eos_token
 
     def process_data_sample(self, example):
-
-        '''
-        Helper function to process the dataset sample by adding prompt and clean if necessary.
-        Args:
-        example: Data sample
-        Returns:
-        processed_example: Data sample post-processing
-        '''
-
+        
         processed_example = "\n You are a Law-Assistant chatbot who helps with user queries chatbot who always responds in the style of a professional and helps them navigate from their issue.\n\n" + example[self.config.INSTRUCTION_FIELD] + "\n\n" + example[self.config.TARGET_FIELD]
 
         return processed_example
 
     def create_dataset(self):
-
-        '''
-        Downloads and processes the dataset
-        Returns:
-        processed_data: Training-ready processed dataset
-        '''
 
         data = load_dataset(self.config.DATASET_ID, split="train")
 
@@ -62,14 +42,7 @@ class sftTrainer:
         return processed_data
 
     def prepare_model(self):
-
-        '''
-        Prepares the model for finetuning by quantizing it and attaching LoRA modules to the model
-        Returns:
-        model - Model ready for finetuning
-        peft_config - LoRA Adapter config
-        '''
-
+        
         bnb_config = GPTQConfig(
                                     bits=self.config.BITS,
                                     disable_exllama=self.config.DISABLE_EXLLAMA,
